@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@import "@fontsource/bagel-fat-one/latin-400.css";
+@import "@fontsource-variable/figtree/wght.css";
+
+@theme {
+  --font-display: "Bagel Fat One", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --font-sans: "Figtree Variable", "Figtree", ui-sans-serif, system-ui, sans-serif;
+
+  --color-gold: #ffd21f;
+  --color-tomato: #e3262e;
+  --color-tomato-deep: #b3161d;
+  --color-ink: #171717;
+  --color-cream: #fff9ee;
+  --color-hero: #fbc24f; /* matches the background of the supplied poster art */
+}
+
+.bg-hero {
+  background-color: var(--color-hero);
+  background-image:
+    radial-gradient(ellipse 60% 70% at 72% 48%, #fbc24f 0%, #fbc24f 45%, transparent 100%),
+    linear-gradient(135deg, #ffe680 0%, #ffd21f 50%, #ffbf2e 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+section[id],
+#builder,
+#sides,
+div[id="contact"] {
+  scroll-margin-top: 5.5rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--color-gold);
+  border-radius: 0.5rem;
+}
+
+/* Text with the same thick black outline as the logo lettering */
+.outline-text {
+  color: #fff;
+  -webkit-text-stroke: 7px var(--color-ink);
+  paint-order: stroke fill;
+  text-shadow: 0 5px 0 var(--color-ink);
+  letter-spacing: 0.01em;
+}
+
+/* Red/white tablecloth band used as a divider */
+.gingham {
+  height: 20px;
+  background-color: #fff;
+  background-image:
+    linear-gradient(90deg, rgba(215, 25, 32, 0.6) 50%, transparent 50%),
+    linear-gradient(rgba(215, 25, 32, 0.6) 50%, transparent 50%);
+  background-size: 20px 20px;
+}
+
+/* Rough brush-stroke edge, like the DEALS banner on the menu poster */
+.brush {
+  clip-path: polygon(
+    1% 14%, 5% 4%, 18% 10%, 38% 2%, 58% 9%, 78% 3%, 95% 9%, 99% 28%, 97% 52%, 100% 76%,
+    95% 94%, 76% 89%, 56% 98%, 34% 91%, 14% 97%, 3% 88%, 0% 62%, 2% 36%
+  );
+}
+
+/* Faint pizza-slice pattern on the black deals section (like the poster) */
+.slice-pattern {
+  background-color: var(--color-ink);
+  background-image: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(227, 38, 46, 0.35), transparent 70%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M20 22 L52 30 L30 58 Z' transform='rotate(-14 36 36)'/%3E%3Cpath d='M78 78 L108 84 L88 108 Z' transform='rotate(18 94 94)'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* One entrance moment: the hero art pops in once */
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.92) rotate(-2deg); }
+  to { opacity: 1; transform: none; }
+}
+.pop-in { animation: pop-in 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+.toast-in { animation: toast-in 0.25s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===================== Motion & hover system ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  transition: opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* Cards: lift, tilt a touch, shadow grows. Springy easing. */
+.pop-card {
+  border: 2px solid var(--color-ink);
+  box-shadow: 0 6px 0 var(--color-ink), 0 18px 30px -14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.35), box-shadow 0.35s ease;
+}
+.pop-card:hover { transform: translateY(-6px) rotate(-0.6deg); box-shadow: 0 13px 0 var(--color-ink); }
+.pop-card-gold { box-shadow: 0 6px 0 var(--color-gold); transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.35), box-shadow 0.35s ease; }
+.pop-card-gold:hover { transform: translateY(-8px) rotate(0.6deg); box-shadow: 0 14px 0 var(--color-gold), 0 24px 40px rgba(255, 195, 66, 0.25); }
+
+/* Buttons: light sweep on hover */
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.38) 50%, transparent 65%);
+  transform: translateX(-130%); transition: transform 0.7s ease;
+}
+.btn-shine:hover::after { transform: translateX(130%); }
+
+/* Headline words rise in one after another (the hero's single entrance moment) */
+@keyframes word-rise { from { opacity: 0; transform: translateY(0.6em) rotate(-4deg); } to { opacity: 1; transform: none; } }
+.word-rise { display: inline-block; animation: word-rise 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+
+/* Cart badge bump when count changes */
+@keyframes bump { 0% { transform: scale(1); } 35% { transform: scale(1.55); } 100% { transform: scale(1); } }
+.bump { animation: bump 0.45s ease-out; }
+
+/* Gentle idle float for decorative slices */
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.bob { animation: bob 5s ease-in-out infinite; }
+
+/* Running ribbon */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* Cart drawer */
+.drawer-panel {
+  transform: translateX(100%); visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.25, 1), visibility 0s linear 0.4s;
+}
+.drawer-panel.open { transform: none; visibility: visible; transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.25, 1), visibility 0s; }
+.drawer-scrim { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+.drawer-scrim.open { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+  .marquee-track, .bob { animation: none; }
+}
+
+/* Richer red for full-width red bands */
+.bg-tomato.py-14, section.bg-tomato { background-image: linear-gradient(160deg, #ee3a41 0%, var(--color-tomato) 45%, var(--color-tomato-deep) 100%); }
+.marquee.bg-tomato { background-image: linear-gradient(90deg, var(--color-tomato-deep), #ee3a41 50%, var(--color-tomato-deep)); }
