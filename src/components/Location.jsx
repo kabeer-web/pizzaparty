@@ -1,7 +1,9 @@
-import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 import { BUSINESS, MAPS_SEARCH_URL, PHONES } from "../config.js";
 import { buildWhatsAppUrl, GENERAL_MESSAGE } from "../utils/whatsapp.js";
 import { Reveal } from "../hooks/parallax.jsx";
+import { HOURS_LABEL } from "../utils/shopStatus.js";
+import ShopStatus from "./ShopStatus.jsx";
 import { SectionHeading, btnInk, btnLight, btnRed } from "./ui.jsx";
 
 export default function Location() {
@@ -25,6 +27,13 @@ export default function Location() {
               <br />
               {a.area}, {a.city}, {a.country}
             </address>
+            <div className="mt-5 rounded-2xl border-2 border-ink bg-white p-4">
+              <h4 className="flex items-center gap-2 font-display text-xl">
+                <Clock size={20} aria-hidden="true" /> Opening hours
+              </h4>
+              <p className="mt-1 text-lg font-bold">Open daily: {HOURS_LABEL}</p>
+              <ShopStatus theme="light" className="mt-2" />
+            </div>
             <a href={MAPS_SEARCH_URL} target="_blank" rel="noopener noreferrer" className={`${btnLight} mt-6`}>
               <MapPin size={18} aria-hidden="true" /> Search on Google Maps
             </a>

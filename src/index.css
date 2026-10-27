@@ -161,3 +161,21 @@ div[id="contact"] {
 /* Richer red for full-width red bands */
 .bg-tomato.py-14, section.bg-tomato { background-image: linear-gradient(160deg, #ee3a41 0%, var(--color-tomato) 45%, var(--color-tomato-deep) 100%); }
 .marquee.bg-tomato { background-image: linear-gradient(90deg, var(--color-tomato-deep), #ee3a41 50%, var(--color-tomato-deep)); }
+
+/* ---- Shop open / closed welcome (ShopWelcome.jsx) ---- */
+@keyframes welcome-pop { from { opacity: 0; transform: translateY(24px) scale(0.9); } to { opacity: 1; transform: none; } }
+.welcome-pop { animation: welcome-pop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+@keyframes sorry-wobble { 0%, 100% { transform: rotate(-7deg) translateY(0); } 50% { transform: rotate(7deg) translateY(-5px); } }
+.sorry-emoji { display: inline-block; animation: sorry-wobble 2.4s ease-in-out infinite; }
+@keyframes tear-drop { 0% { opacity: 0; transform: translateY(0); } 25% { opacity: 1; } 100% { opacity: 0; transform: translateY(30px); } }
+.tear { animation: tear-drop 2s ease-in infinite; }
+@keyframes zzz-float { 0% { opacity: 0; transform: translate(0, 0) scale(0.7); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(14px, -26px) scale(1.1); } }
+.zzz { animation: zzz-float 3s ease-out infinite; }
+@keyframes pizza-fall { 0% { opacity: 0; transform: translateY(-12vh) rotate(0deg); } 12% { opacity: 1; } 100% { opacity: 0; transform: translateY(105vh) rotate(380deg); } }
+.pizza-fall { animation: pizza-fall 3.6s ease-in both; }
+@keyframes open-chip { 0% { opacity: 0; transform: translate(-50%, -14px) scale(0.9); } 10%, 82% { opacity: 1; transform: translate(-50%, 0) scale(1); } 100% { opacity: 0; transform: translate(-50%, -10px) scale(0.96); } }
+.open-chip { animation: open-chip 4.6s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .sorry-emoji, .tear, .zzz { animation: none; }
+  .pizza-fall { display: none; }
+}

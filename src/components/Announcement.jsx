@@ -3,6 +3,7 @@ import { DEALS, LOWEST_DEAL_PRICE } from "../data/menu.js";
 import { PRIMARY_PHONE } from "../config.js";
 import { formatPKR } from "../utils/format.js";
 import { buildWhatsAppUrl, GENERAL_MESSAGE } from "../utils/whatsapp.js";
+import ShopStatus from "./ShopStatus.jsx";
 
 export default function Announcement() {
   return (
@@ -12,6 +13,7 @@ export default function Announcement() {
           {DEALS.length} ready-made pizza deals, starting at{" "}
           <span className="text-gold">{formatPKR(LOWEST_DEAL_PRICE)}</span>.
         </p>
+        <ShopStatus theme="dark" />
         <a
           href={buildWhatsAppUrl(PRIMARY_PHONE.intl, GENERAL_MESSAGE)}
           target="_blank"

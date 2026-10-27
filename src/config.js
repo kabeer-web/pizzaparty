@@ -3,6 +3,10 @@
 // Website built by BeerFlow Technologies.
 // ---------------------------------------------------------------------------
 
+// Shop timings (24h, local to the shop). Closing time earlier than opening time means it closes after midnight.
+// Open daily 6:00 PM -> 2:00 AM. Used by the live "Open now / Closed" badge and the structured data.
+export const SHOP_HOURS = { timeZone: "Asia/Karachi", open: "18:00", close: "02:00" };
+
 export const BUSINESS = {
   name: "Pizza Party",
   tagline: "One Bite, Pure Happiness",
@@ -18,8 +22,9 @@ export const BUSINESS = {
   },
   // Local format. International (wa.me / tel:) versions are derived below.
   phones: ["0300-3718090", "0312-2280406"],
+  // Confirmed by the owner: daily 6 PM - 2 AM (schema.org format, derived from SHOP_HOURS).
+  openingHours: [`Mo-Su ${SHOP_HOURS.open}-${SHOP_HOURS.close}`],
   // Fill these in ONLY once the owner confirms them. Left empty on purpose.
-  openingHours: [], // e.g. ["Mo-Su 12:00-23:00"] (schema.org format)
   socialLinks: [], // verified profile URLs only
   geo: null, // { latitude: 24.xxxx, longitude: 66.xxxx } once verified
 };

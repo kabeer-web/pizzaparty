@@ -14,6 +14,7 @@ import Footer from "./components/Footer.jsx";
 import MobileCartBar from "./components/MobileCartBar.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 import Toast from "./components/Toast.jsx";
+import ShopWelcome from "./components/ShopWelcome.jsx";
 import useCart from "./hooks/useCart.js";
 
 export default function App() {
@@ -71,6 +72,7 @@ export default function App() {
       </main>
       <Footer onOpenCart={openCart} />
       <Toast toast={toast} onOpen={openCart} />
+      <ShopWelcome />
       <MobileCartBar count={cart.count} total={cart.total} onOpen={openCart} />
       <CartDrawer open={cartOpen} onClose={closeCart} cart={cart} />
     </div>
